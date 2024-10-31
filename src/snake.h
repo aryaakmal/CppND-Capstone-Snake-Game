@@ -27,6 +27,7 @@ class Snake {
   float head_x;
   float head_y;
   std::vector<SDL_Point> body;
+  float speed_hold;
 
  private:
   void UpdateHead();

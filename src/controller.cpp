@@ -35,6 +35,11 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
           ChangeDirection(snake, Snake::Direction::kRight,
                           Snake::Direction::kLeft);
           break;
+
+        case SDLK_SPACE:
+          if(snake.speed != 0.0f) snake.speed_hold = snake.speed;
+          snake.speed = (snake.speed == 0.0f) ? snake.speed_hold : 0.0f;
+          break;
       }
     }
   }
