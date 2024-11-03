@@ -97,6 +97,11 @@ void Game::Update() {
     snake.GrowBody();
     snake.speed += 0.02;
   }
+
+ // Check if there's poison over here
+ if (poison.x == new_x && poison.y == new_y) {
+    snake.alive = false; 
+ }
 }
 
 int Game::GetScore() const { return score; }
