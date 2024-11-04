@@ -12,7 +12,7 @@ In this project, you can build your own C++ application or extend this Snake gam
 * User enters name at start; Score, Length and Time elapsed are printed to <Name>.results.txt in local directory
 * Game can be paused and restarted by toggling the spacebar
 * Player name displayed in window title
-* Poison placed on game grid. Game ends if snake passes over it.
+* Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7

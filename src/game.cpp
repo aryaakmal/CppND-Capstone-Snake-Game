@@ -100,7 +100,12 @@ void Game::Update() {
 
  // Check if there's poison over here
  if (poison.x == new_x && poison.y == new_y) {
-    snake.alive = false; 
+    score--;
+    PlacePoison();
+    if(score < 0)
+    {
+     snake.alive = false; 
+    }
  }
 }
 
