@@ -2,6 +2,7 @@
 #define SNAKE_H
 
 #include <vector>
+#include <random>
 #include "SDL.h"
 
 class Snake {
@@ -36,6 +37,34 @@ class Snake {
   bool growing{false};
   int grid_width;
   int grid_height;
+};
+
+class Bomb {
+ public:
+  
+  enum class Direction { kUp, kDown, kLeft, kRight };
+  Bomb(int grid_width, int grid_height) 
+     : grid_width(grid_width),
+       grid_height(grid_height),
+       head_x(3*grid_width/4),
+       head_y(3*grid_height/4) {}
+ 
+  void Update();
+  bool BombCell(int x, int y);
+  Direction direction = Direction::kDown;
+  float speed{0.2f};
+  float head_x;
+  float head_y;
+
+ private:
+  void UpdateHead();
+  int grid_width;
+  int grid_height;
+
+//std::random_device dev;
+//std::mt19937 engine;
+//std::uniform_int_distribution<int> random_dir;
+
 };
 
 #endif

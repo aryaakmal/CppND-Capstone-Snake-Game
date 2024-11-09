@@ -38,7 +38,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const &poison) {
+void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const &poison, Bomb const bomb) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -75,6 +75,12 @@ void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const 
   } else {
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
   }
+  SDL_RenderFillRect(sdl_renderer, &block);
+
+  //Render bomb
+  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+  block.x = static_cast<int>(bomb.head_x) * block.w;
+  block.y = static_cast<int>(bomb.head_y) * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Update Screen

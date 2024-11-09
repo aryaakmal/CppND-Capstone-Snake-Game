@@ -3,7 +3,7 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
+    : snake(grid_width, grid_height), bomb(grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
@@ -26,7 +26,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food, poison);
+    renderer.Render(snake, food, poison, bomb);
 
     frame_end = SDL_GetTicks();
 
@@ -72,7 +72,7 @@ void Game::PlacePoison() {
     x = random_w(engine);
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
-    // food.
+    // poison.
     if (!snake.SnakeCell(x, y)) {
       poison.x = x;
       poison.y = y;
@@ -107,6 +107,8 @@ void Game::Update() {
      snake.alive = false; 
     }
  }
+ // update bomb
+ bomb.Update();
 }
 
 int Game::GetScore() const { return score; }
