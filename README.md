@@ -13,6 +13,7 @@ In this project, you can build your own C++ application or extend this Snake gam
 * Game can be paused and restarted by toggling the spacebar
 * Player name displayed in window title
 * Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
+* Randomly moving bomb object placed on grid.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
