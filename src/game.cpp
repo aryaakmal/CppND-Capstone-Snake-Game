@@ -89,6 +89,14 @@ void Game::Update() {
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
 
+  //check if there's a bomb over there
+
+  int bomb_x = static_cast<int>(bomb.head_x);
+  int bomb_y = static_cast<int>(bomb.head_y);
+  if (bomb_x == new_x && bomb_y == new_y) {
+   snake.alive = false;
+  }
+
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
