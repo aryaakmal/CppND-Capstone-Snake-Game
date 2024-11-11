@@ -28,9 +28,10 @@ class Game {
 
   int score{0};
 
-  void PlaceFood();
+//void PlaceFood();
   void Update();
-  void PlacePoison();
+//void PlacePoison();
+  void PlaceItem(SDL_Point &item);
 };
 
 #endif

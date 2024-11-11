@@ -7,8 +7,10 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
-  PlaceFood();
-  PlacePoison();
+//PlaceFood();
+//PlacePoison();
+  PlaceItem(food);
+  PlaceItem(poison);
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -51,6 +53,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   }
 }
 
+/*
 void Game::PlaceFood() {
   int x, y;
   while (true) {
@@ -80,6 +83,22 @@ void Game::PlacePoison() {
     }
   }
 }
+*/
+
+void Game::PlaceItem(SDL_Point &item) {
+  int x, y;
+  while (true) {
+    x = random_w(engine);
+    y = random_h(engine);
+    // Check that the location is not occupied by a snake item before placing
+    // new item.
+    if (!snake.SnakeCell(x, y)) {
+      item.x = x;
+      item.y = y;
+      return;
+    }
+  }
+}
 
 void Game::Update() {
   if (!snake.alive) return;
@@ -100,7 +119,8 @@ void Game::Update() {
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
-    PlaceFood();
+    //PlaceFood();
+    PlaceItem(food);
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.02;
@@ -109,7 +129,8 @@ void Game::Update() {
  // Check if there's poison over here
  if (poison.x == new_x && poison.y == new_y) {
     score--;
-    PlacePoison();
+  //PlacePoison();
+    PlaceItem(poison);
     if(score < 0)
     {
      snake.alive = false; 
