@@ -85,7 +85,9 @@ void Game::PlacePoison() {
 }
 */
 
-void Game::PlaceItem(SDL_Point &item) {
+//void Game::PlaceItem(SDL_Point &item) {
+template <typename T>
+void Game::PlaceItem(T &item) {
   int x, y;
   while (true) {
     x = random_w(engine);

@@ -31,7 +31,9 @@ class Game {
 //void PlaceFood();
   void Update();
 //void PlacePoison();
-  void PlaceItem(SDL_Point &item);
+//void PlaceItem(SDL_Point &item);
+  template <typename T>
+  void PlaceItem(T &item);
 };
 
 #endif
