@@ -11,6 +11,9 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
 //PlacePoison();
   PlaceItem(food);
   PlaceItem(poison);
+  PlaceItem(bomb);
+  bomb.head_x = static_cast<float>(bomb.x);
+  bomb.head_y = static_cast<float>(bomb.y);
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,

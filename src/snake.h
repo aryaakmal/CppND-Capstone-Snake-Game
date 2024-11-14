@@ -55,6 +55,8 @@ class Bomb {
   float speed{0.2f};
   float head_x;
   float head_y;
+  int x;
+  int y;
 
  private:
   void UpdateHead();
