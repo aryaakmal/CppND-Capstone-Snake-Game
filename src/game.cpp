@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include <thread>
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
@@ -31,6 +32,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
+    
     renderer.Render(snake, food, poison, bomb);
 
     frame_end = SDL_GetTicks();
@@ -108,7 +110,11 @@ void Game::PlaceItem(T &item) {
 void Game::Update() {
   if (!snake.alive) return;
 
-  snake.Update();
+  //std::thread t( (snake.Update()) );
+  //std::thread t([&snake]() { snake.Update(); });
+  std::thread t1(&Snake::Update, &snake);
+  //t1.join();
+  //snake.Update();
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
@@ -142,7 +148,10 @@ void Game::Update() {
     }
  }
  // update bomb
- bomb.Update();
+ //bomb.Update();
+ std::thread t2(&Bomb::Update, &bomb);
+ t1.join();
+ t2.join();
 }
 
 int Game::GetScore() const { return score; }
