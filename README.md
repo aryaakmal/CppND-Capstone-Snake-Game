@@ -15,6 +15,43 @@ In this project, you can build your own C++ application or extend this Snake gam
 * Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
 * Randomly moving bomb object placed on grid.
 
+## Rubric Elements
+
+### README (All Rubric Points REQUIRED)
+
+* A README with instructions is included with the project
+* The README indicates the new features you added to the game.
+* The README includes information about each rubric point addressed.
+
+
+
+### Compiling and Testing (All Rubric Points REQUIRED)
+
+### Loops, Functions, I/O - meet at least 2 criteria
+
+* The project reads data from a file and process the data, or the program writes data to a file:
+  Score, length and time elapsed are written to a new file, or appended to an existing file
+* The project accepts user input and processes the input:
+  The name of the player is read in to the console and used as the base for the output file, also player
+  name is displayed in the frame of the game. Game reads input from keyboard to pause or restart the game 
+  by toggling the spacebar.
+
+### Object Oriented Programming - meet at least 3 criteria
+* One or more classes are added to the project with appropriate access specifiers for class members:
+Bomb class is added to the program
+* Class constructors utilize member initialization lists: Bomb class is initialized with initialization list.
+* Templates generalize functions or classes in the project: Game::PlaceItem is defined using a template, to
+  accept food and poison variables, or Bomb object.
+
+### Memory Management - meet at least 3 criteria
+* The project makes use of references in function declarations: 
+  * Game::PlaceItem is called with a reference to variable item in game.cpp. 
+  * Snake::Update and Bomb::Update called with references to objects snake and bomb in threads t1 and t2
+
+### Concurrency - meet at least 2 criteria
+* The project uses multithreading: Snake::Update() and Bomb::Update() run in separate threads that are joined 
+  at the end of Game::Update()
+
 ## Dependencies for Running Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
