@@ -21,6 +21,7 @@ class Game {
   SDL_Point food;
   SDL_Point poison;
   Bomb bomb;
+  MissileQueue mqueue;
 
   std::random_device dev;
   std::mt19937 engine;

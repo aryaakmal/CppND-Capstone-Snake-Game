@@ -69,4 +69,20 @@ class Bomb {
 
 };
 
+class Missile {
+ public:
+  Missile(int id) : _id(id) {}
+ private:
+  int _id;
+};
+
+class MissileQueue {
+ public:
+//MissileQueue();
+  void pushBack(Missile &&m);
+  void printSize();
+ private:
+  std::vector<Missile> _missiles;
+};
+
 #endif

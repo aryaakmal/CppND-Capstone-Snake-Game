@@ -130,6 +130,9 @@ void Game::Update() {
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
+    Missile missile(score);
+    mqueue.pushBack(std::move(missile));
+    mqueue.printSize();
     //PlaceFood();
     PlaceItem(food);
     // Grow snake and increase speed.

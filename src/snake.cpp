@@ -127,3 +127,11 @@ bool Bomb::BombCell(int x, int y) {
   }
   return false;
 }
+
+void MissileQueue::pushBack(Missile &&m){
+  _missiles.emplace_back(std::move(m));
+}
+
+void MissileQueue::printSize(){
+  std::cout << "Food ingested: " << _missiles.size() <<std::endl;
+}
