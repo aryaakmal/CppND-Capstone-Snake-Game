@@ -2,6 +2,7 @@
 #include <iostream>
 #include <thread>
 #include "SDL.h"
+#include <memory>
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height), bomb(grid_width, grid_height),
@@ -131,8 +132,10 @@ void Game::Update() {
   if (food.x == new_x && food.y == new_y) {
     score++;
     Missile missile(score);
-    mqueue.pushBack(std::move(missile));
-    mqueue.printSize();
+  //mqueue.pushBack(std::move(missile));
+  //mqueue.printSize();
+    mqueue->pushBack(std::move(missile));
+    mqueue->printSize();
     //PlaceFood();
     PlaceItem(food);
     // Grow snake and increase speed.

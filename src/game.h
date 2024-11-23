@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "snake.h"
 #include <thread>
+#include <memory>
 
 class Game {
  public:
@@ -21,7 +22,9 @@ class Game {
   SDL_Point food;
   SDL_Point poison;
   Bomb bomb;
-  MissileQueue mqueue;
+//MissileQueue mqueue;
+//std::shared_ptr<MissileQueue> mqueue(new MissileQueue); //why doesn't this work?
+  std::shared_ptr<MissileQueue> mqueue = std::make_shared<MissileQueue>();
 
   std::random_device dev;
   std::mt19937 engine;

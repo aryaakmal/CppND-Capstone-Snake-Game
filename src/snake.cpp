@@ -1,6 +1,7 @@
 #include "snake.h"
 #include <cmath>
 #include <iostream>
+#include <mutex>
 
 void Snake::Update() {
   SDL_Point prev_cell{
@@ -129,9 +130,13 @@ bool Bomb::BombCell(int x, int y) {
 }
 
 void MissileQueue::pushBack(Missile &&m){
+  _mutex.lock();
   _missiles.emplace_back(std::move(m));
+  _mutex.unlock();
 }
 
 void MissileQueue::printSize(){
+  _mutex.lock();
   std::cout << "Food ingested: " << _missiles.size() <<std::endl;
+  _mutex.unlock();
 }

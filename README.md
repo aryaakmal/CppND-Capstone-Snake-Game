@@ -8,12 +8,15 @@ The Capstone Project gives you a chance to integrate what you've learned through
 
 In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
 
+## Note on use of sources
+I have liberally used and repurposed elements of the codebase for the course, including from examples, exercises and projects.
 ## Added Features
 * User enters name at start; Score, Length and Time elapsed are printed to <Name>.results.txt in local directory
 * Game can be paused and restarted by toggling the spacebar
 * Player name displayed in window title
 * Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
 * Randomly moving bomb object placed on grid.
+* missiles
 
 ## Rubric Elements
 
@@ -38,7 +41,7 @@ In this project, you can build your own C++ application or extend this Snake gam
 
 ### Object Oriented Programming - meet at least 3 criteria
 * One or more classes are added to the project with appropriate access specifiers for class members:
-Bomb class is added to the program
+Bomb, Missile and MissileQueue classes are added to the program
 * Class constructors utilize member initialization lists: Bomb class is initialized with initialization list.
 * Templates generalize functions or classes in the project: Game::PlaceItem is defined using a template, to
   accept food and poison variables, or Bomb object.
@@ -47,10 +50,16 @@ Bomb class is added to the program
 * The project makes use of references in function declarations: 
   * Game::PlaceItem is called with a reference to variable item in game.cpp. 
   * Snake::Update and Bomb::Update called with references to objects snake and bomb in threads t1 and t2
+* The project uses move semantics to move data instead of copying it, where possible.
+  * Missile objects are moved to the MissileQueue via move semantics
+* The project uses smart pointers instead of raw pointers.
+  * MissileQueue object is declared as a shared\_ptr.
 
 ### Concurrency - meet at least 2 criteria
 * The project uses multithreading: Snake::Update() and Bomb::Update() run in separate threads that are joined 
   at the end of Game::Update()
+* A mutex or lock is used in the project: a lock is used to protect the \_missiles private variable in MissileQueue class.
+* (Future)
 
 ## Dependencies for Running Locally
 * cmake >= 3.7

@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include "SDL.h"
+#include <mutex>
 
 class Snake {
  public:
@@ -83,6 +84,7 @@ class MissileQueue {
   void printSize();
  private:
   std::vector<Missile> _missiles;
+  std::mutex _mutex;
 };
 
 #endif
