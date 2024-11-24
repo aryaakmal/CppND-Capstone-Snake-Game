@@ -3,6 +3,7 @@
 #include <thread>
 #include "SDL.h"
 #include <memory>
+#include <future>
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height), bomb(grid_width, grid_height),
@@ -116,6 +117,7 @@ void Game::Update() {
   std::thread t1(&Snake::Update, &snake);
   //t1.join();
   //snake.Update();
+  std::future<void> ftr;
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
@@ -134,13 +136,15 @@ void Game::Update() {
     Missile missile(score);
   //mqueue.pushBack(std::move(missile));
   //mqueue.printSize();
-    mqueue->pushBack(std::move(missile));
+  //mqueue->pushBack(std::move(missile));
+    ftr=std::async(std::launch::async, &MissileQueue::pushBack, mqueue, std::move(missile));
     mqueue->printSize();
     //PlaceFood();
     PlaceItem(food);
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.02;
+    //ftr.wait();
   }
 
  // Check if there's poison over here
@@ -155,6 +159,7 @@ void Game::Update() {
  }
  // update bomb
  //bomb.Update();
+ if(ftr.valid()){ftr.wait();}
  std::thread t2(&Bomb::Update, &bomb);
  t1.join();
  t2.join();

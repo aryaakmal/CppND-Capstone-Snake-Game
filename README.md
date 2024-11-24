@@ -59,7 +59,7 @@ Bomb, Missile and MissileQueue classes are added to the program
 * The project uses multithreading: Snake::Update() and Bomb::Update() run in separate threads that are joined 
   at the end of Game::Update()
 * A mutex or lock is used in the project: a lock is used to protect the \_missiles private variable in MissileQueue class.
-* (Future)
+* A promise and future is used in the project: missile object is pushed to MissileQueue using async returned to a future.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
