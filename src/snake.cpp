@@ -140,3 +140,9 @@ void MissileQueue::printSize(){
   std::cout << "Food ingested: " << _missiles.size() <<std::endl;
   _mutex.unlock();
 }
+
+Missile MissileQueue::popBack(){
+   auto lastElement = _missiles.back();
+   if (!_missiles.empty()){ _missiles.pop_back();}
+   return lastElement;
+}

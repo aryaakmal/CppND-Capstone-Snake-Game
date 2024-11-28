@@ -22,6 +22,7 @@ class Game {
   SDL_Point food;
   SDL_Point poison;
   Bomb bomb;
+  Missile missile;
 //MissileQueue mqueue;
 //std::shared_ptr<MissileQueue> mqueue(new MissileQueue); //why doesn't this work?
   std::shared_ptr<MissileQueue> mqueue = std::make_shared<MissileQueue>();

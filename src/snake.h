@@ -82,6 +82,7 @@ class MissileQueue {
 //MissileQueue();
   void pushBack(Missile &&m);
   void printSize();
+  Missile popBack();
  private:
   std::vector<Missile> _missiles;
   std::mutex _mutex;

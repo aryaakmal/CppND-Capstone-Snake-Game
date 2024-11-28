@@ -7,7 +7,7 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height), bomb(grid_width, grid_height),
-      engine(dev()),
+      engine(dev()), missile(0),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
 //PlaceFood();
@@ -133,7 +133,7 @@ void Game::Update() {
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
-    Missile missile(score);
+  Missile missile(score);
   //mqueue.pushBack(std::move(missile));
   //mqueue.printSize();
   //mqueue->pushBack(std::move(missile));
@@ -150,6 +150,9 @@ void Game::Update() {
  // Check if there's poison over here
  if (poison.x == new_x && poison.y == new_y) {
     score--;
+    //auto missile = mqueue->popBack();
+    missile = std::move(mqueue->popBack());
+    mqueue->printSize();
   //PlacePoison();
     PlaceItem(poison);
     if(score < 0)
