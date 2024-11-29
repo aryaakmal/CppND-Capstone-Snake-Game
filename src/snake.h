@@ -72,9 +72,23 @@ class Bomb {
 
 class Missile {
  public:
-  Missile(int id) : _id(id) {}
+  enum class Direction { kUp, kDown, kLeft, kRight };
+//Missile(int id) : _id(id) {}
+  Missile(int id, int grid_width, int grid_height) : _id(id), grid_width(grid_width), grid_height(grid_height) {}
+
+  void Update();
+  bool MissileCell(int x, int y);
+  Direction direction = Direction::kDown;
+  float speed{0.2f};
+  float head_x;
+  float head_y;
+  int x;
+  int y;
  private:
   int _id;
+  void UpdateHead();
+  int grid_width;
+  int grid_height;
 };
 
 class MissileQueue {

@@ -7,7 +7,7 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height), bomb(grid_width, grid_height),
-      engine(dev()), missile(0),
+      engine(dev()), missile(0, 0, 0),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
 //PlaceFood();
@@ -17,6 +17,9 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
   PlaceItem(bomb);
   bomb.head_x = static_cast<float>(bomb.x);
   bomb.head_y = static_cast<float>(bomb.y);
+  PlaceItem(missile);
+  missile.head_x = static_cast<float>(missile.x);
+  missile.head_y = static_cast<float>(missile.y);
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -35,7 +38,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     controller.HandleInput(running, snake);
     Update();
     
-    renderer.Render(snake, food, poison, bomb);
+    renderer.Render(snake, food, poison, bomb, missile);
 
     frame_end = SDL_GetTicks();
 
@@ -130,10 +133,18 @@ void Game::Update() {
    snake.alive = false;
   }
 
+  //check if there's a missile over there
+
+  int missile_x = static_cast<int>(missile.head_x);
+  int missile_y = static_cast<int>(missile.head_y);
+  if (missile_x == new_x && missile_y == new_y) {
+   snake.alive = false;
+  }
+
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
-  Missile missile(score);
+  Missile missile(score, food.x, food.y); //new missile starts where last food was ingested.
   //mqueue.pushBack(std::move(missile));
   //mqueue.printSize();
   //mqueue->pushBack(std::move(missile));
@@ -162,6 +173,7 @@ void Game::Update() {
  }
  // update bomb
  //bomb.Update();
+ missile.Update();
  if(ftr.valid()){ftr.wait();}
  std::thread t2(&Bomb::Update, &bomb);
  t1.join();

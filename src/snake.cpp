@@ -129,6 +129,48 @@ bool Bomb::BombCell(int x, int y) {
   return false;
 }
 
+void Missile::Update() {
+  SDL_Point prev_cell{
+      static_cast<int>(head_x),
+      static_cast<int>(head_y)};  // We first capture the Missile's cell before updating.
+  UpdateHead();
+  SDL_Point current_cell{
+      static_cast<int>(head_x),
+      static_cast<int>(head_y)};  // Capture the Missile's cell after updating.
+}
+
+void Missile::UpdateHead() {
+  switch (_id%4) {
+    case 0:
+      head_y -= speed;
+      break;
+
+    case 1:
+      head_y += speed;
+      break;
+
+    case 2:
+      head_x -= speed;
+      break;
+
+    case 3:
+      head_x += speed;
+      break;
+  }
+
+  // Wrap the path around to the beginning if going off of the screen.
+  head_x = fmod(head_x + grid_width, grid_width);
+  head_y = fmod(head_y + grid_height, grid_height);
+}
+
+// Inefficient method to check if cell is occupied by missile.
+bool Missile::MissileCell(int x, int y) {
+  if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y)) {
+    return true;
+  }
+  return false;
+}
+
 void MissileQueue::pushBack(Missile &&m){
   _mutex.lock();
   _missiles.emplace_back(std::move(m));
