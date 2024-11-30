@@ -30,14 +30,14 @@ class Snake {
   float head_y;
   std::vector<SDL_Point> body;
   float speed_hold;
+  int grid_width;
+  int grid_height;
 
  private:
   void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
   bool growing{false};
-  int grid_width;
-  int grid_height;
 };
 
 class Bomb {
@@ -84,11 +84,12 @@ class Missile {
   float head_y;
   int x;
   int y;
+  void printID();
+  int grid_width;
+  int grid_height;
  private:
   int _id;
   void UpdateHead();
-  int grid_width;
-  int grid_height;
 };
 
 class MissileQueue {
@@ -97,6 +98,7 @@ class MissileQueue {
   void pushBack(Missile &&m);
   void printSize();
   Missile popBack();
+  int qsize();
  private:
   std::vector<Missile> _missiles;
   std::mutex _mutex;

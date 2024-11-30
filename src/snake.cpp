@@ -171,6 +171,14 @@ bool Missile::MissileCell(int x, int y) {
   return false;
 }
 
+void Missile::printID(){
+ std::cout << "missile ID: " <<_id << std::endl;
+}
+
+int MissileQueue::qsize(){
+ return _missiles.size();
+}
+
 void MissileQueue::pushBack(Missile &&m){
   _mutex.lock();
   _missiles.emplace_back(std::move(m));
@@ -179,7 +187,7 @@ void MissileQueue::pushBack(Missile &&m){
 
 void MissileQueue::printSize(){
   _mutex.lock();
-  std::cout << "Food ingested: " << _missiles.size() <<std::endl;
+  std::cout << "queue length: " << _missiles.size() <<std::endl;
   _mutex.unlock();
 }
 

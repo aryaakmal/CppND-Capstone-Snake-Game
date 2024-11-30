@@ -7,7 +7,7 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height), bomb(grid_width, grid_height),
-      engine(dev()), missile(0, 0, 0),
+      engine(dev()), missile(0, grid_width, grid_height),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
 //PlaceFood();
@@ -144,12 +144,14 @@ void Game::Update() {
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
-  Missile missile(score, food.x, food.y); //new missile starts where last food was ingested.
-  //mqueue.pushBack(std::move(missile));
-  //mqueue.printSize();
-  //mqueue->pushBack(std::move(missile));
+    m_cnt++;
+    Missile missile(m_cnt, snake.grid_width, snake.grid_height); 
+    PlaceItem(missile);
+    missile.head_x = static_cast<float>(missile.x);
+    missile.head_y = static_cast<float>(missile.y);
     ftr=std::async(std::launch::async, &MissileQueue::pushBack, mqueue, std::move(missile));
-    mqueue->printSize();
+  //mqueue->printSize();
+  //missile.printID();
     //PlaceFood();
     PlaceItem(food);
     // Grow snake and increase speed.
@@ -162,8 +164,12 @@ void Game::Update() {
  if (poison.x == new_x && poison.y == new_y) {
     score--;
     //auto missile = mqueue->popBack();
-    missile = std::move(mqueue->popBack());
     mqueue->printSize();
+    if(score > 0){
+     missile = std::move(mqueue->popBack());
+    }
+    mqueue->printSize();
+    missile.printID();
   //PlacePoison();
     PlaceItem(poison);
     if(score < 0)
@@ -172,12 +178,14 @@ void Game::Update() {
     }
  }
  // update bomb
- //bomb.Update();
- missile.Update();
+ // bomb.Update();
+ //missile.Update();
  if(ftr.valid()){ftr.wait();}
  std::thread t2(&Bomb::Update, &bomb);
+ std::thread t3(&Missile::Update, &missile);
  t1.join();
  t2.join();
+ t3.join();
 }
 
 int Game::GetScore() const { return score; }

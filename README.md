@@ -16,7 +16,11 @@ I have liberally used and repurposed elements of the codebase for the course, in
 * Player name displayed in window title
 * Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
 * Randomly moving bomb object placed on grid.
-* missiles
+  * if head of snake is colocated with bomb, game ends.
+* missiles 
+  * a missile is created and pushed onto a queue each time food is ingested. 
+  * a missile os popped off the queue and placed on grid each time poison is ingested. 
+  * if head of snake is colocated with missile, game ends.
 
 ## Rubric Elements
 
