@@ -10,8 +10,6 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       engine(dev()), missile(0, grid_width, grid_height),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
-//PlaceFood();
-//PlacePoison();
   PlaceItem(food);
   PlaceItem(poison);
   PlaceItem(bomb);
@@ -63,39 +61,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   }
 }
 
-/*
-void Game::PlaceFood() {
-  int x, y;
-  while (true) {
-    x = random_w(engine);
-    y = random_h(engine);
-    // Check that the location is not occupied by a snake item before placing
-    // food.
-    if (!snake.SnakeCell(x, y)) {
-      food.x = x;
-      food.y = y;
-      return;
-    }
-  }
-}
 
-void Game::PlacePoison() {
-  int x, y;
-  while (true) {
-    x = random_w(engine);
-    y = random_h(engine);
-    // Check that the location is not occupied by a snake item before placing
-    // poison.
-    if (!snake.SnakeCell(x, y)) {
-      poison.x = x;
-      poison.y = y;
-      return;
-    }
-  }
-}
-*/
-
-//void Game::PlaceItem(SDL_Point &item) {
+//template for placing food, poison or missile on grid.
 template <typename T>
 void Game::PlaceItem(T &item) {
   int x, y;
@@ -115,11 +82,7 @@ void Game::PlaceItem(T &item) {
 void Game::Update() {
   if (!snake.alive) return;
 
-  //std::thread t( (snake.Update()) );
-  //std::thread t([&snake]() { snake.Update(); });
   std::thread t1(&Snake::Update, &snake);
-  //t1.join();
-  //snake.Update();
   std::future<void> ftr;
 
   int new_x = static_cast<int>(snake.head_x);
@@ -150,14 +113,10 @@ void Game::Update() {
     missile.head_x = static_cast<float>(missile.x);
     missile.head_y = static_cast<float>(missile.y);
     ftr=std::async(std::launch::async, &MissileQueue::pushBack, mqueue, std::move(missile));
-  //mqueue->printSize();
-  //missile.printID();
-    //PlaceFood();
     PlaceItem(food);
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.02;
-    //ftr.wait();
   }
 
  // Check if there's poison over here
@@ -170,16 +129,12 @@ void Game::Update() {
     }
     mqueue->printSize();
     missile.printID();
-  //PlacePoison();
     PlaceItem(poison);
     if(score < 0)
     {
      snake.alive = false; 
     }
  }
- // update bomb
- // bomb.Update();
- //missile.Update();
  if(ftr.valid()){ftr.wait();}
  std::thread t2(&Bomb::Update, &bomb);
  std::thread t3(&Missile::Update, &missile);

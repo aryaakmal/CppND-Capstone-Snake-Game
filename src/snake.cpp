@@ -91,8 +91,6 @@ void Bomb::Update() {
 }
 
 void Bomb::UpdateHead() {
-//engine(dev());
-//int
   std::random_device dev;
   std::mt19937 engine(dev());
   std::uniform_int_distribution<int> random_dir(1,4);

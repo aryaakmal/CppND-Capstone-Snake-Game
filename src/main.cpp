@@ -17,6 +17,7 @@ int main() {
   std::string user;
   std::ofstream result_file;
 
+  //time the game duration
   auto start = std::chrono::system_clock::now();
   std::time_t start_time = std::chrono::system_clock::to_time_t(start);
  
@@ -34,6 +35,8 @@ int main() {
 
   auto end = std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end-start;
+
+  //output results to player's text file
   result_file.open(user+".results.txt", std::ios_base::app);
   result_file << "----------\n";
   result_file << "Started at: " << std::ctime(&start_time);

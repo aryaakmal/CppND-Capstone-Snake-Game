@@ -40,6 +40,7 @@ class Snake {
   bool growing{false};
 };
 
+//class for randomly moving Bomb object
 class Bomb {
  public:
   
@@ -64,16 +65,12 @@ class Bomb {
   int grid_width;
   int grid_height;
 
-//std::random_device dev;
-//std::mt19937 engine;
-//std::uniform_int_distribution<int> random_dir;
-
 };
 
+//class for numbered Missile object moving in one of 4 cardinal directions, based on _id value.
 class Missile {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
-//Missile(int id) : _id(id) {}
   Missile(int id, int grid_width, int grid_height) : _id(id), grid_width(grid_width), grid_height(grid_height) {}
 
   void Update();
@@ -92,9 +89,9 @@ class Missile {
   void UpdateHead();
 };
 
+//class for queue of Missile objects
 class MissileQueue {
  public:
-//MissileQueue();
   void pushBack(Missile &&m);
   void printSize();
   Missile popBack();
