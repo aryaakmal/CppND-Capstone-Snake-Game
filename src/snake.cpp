@@ -190,7 +190,9 @@ void MissileQueue::printSize(){
 }
 
 Missile MissileQueue::popBack(){
+   _mutex.lock();
    auto lastElement = _missiles.back();
    if (!_missiles.empty()){ _missiles.pop_back();}
+   _mutex.unlock();
    return lastElement;
 }
