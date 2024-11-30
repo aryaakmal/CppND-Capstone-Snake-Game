@@ -11,15 +11,15 @@ In this project, you can build your own C++ application or extend this Snake gam
 ## Note on use of sources
 I have liberally used and repurposed elements of the codebase for the course, including from examples, exercises and projects.
 ## Added Features
-* User enters name at start; Score, Length and Time elapsed are printed to <Name>.results.txt in local directory
-* Game can be paused and restarted by toggling the spacebar
-* Player name displayed in window title
+* User enters name at start; Score, Length and Time elapsed are printed to \<name\>.results.txt in local directory.
+* Game can be paused and restarted by toggling the spacebar.
+* Player name displayed in window title.
 * Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
 * Randomly moving bomb object placed on grid.
   * if head of snake is colocated with bomb, game ends.
-* missiles 
+* Missiles 
   * a missile is created and pushed onto a queue each time food is ingested. 
-  * a missile os popped off the queue and placed on grid each time poison is ingested. 
+  * a missile is popped off the queue and placed on grid each time poison is ingested. 
   * if head of snake is colocated with missile, game ends.
 
 ## Rubric Elements
@@ -46,22 +46,24 @@ I have liberally used and repurposed elements of the codebase for the course, in
 ### Object Oriented Programming - meet at least 3 criteria
 * One or more classes are added to the project with appropriate access specifiers for class members:
 Bomb, Missile and MissileQueue classes are added to the program
-* Class constructors utilize member initialization lists: Bomb class is initialized with initialization list.
+* Class constructors utilize member initialization lists: Bomb and Missile classes are initialized with 
+initialization lists.
 * Templates generalize functions or classes in the project: Game::PlaceItem is defined using a template, to
-  accept food and poison variables, or Bomb object.
+  accept food and poison variables, or Bomb and Missile objects.
 
 ### Memory Management - meet at least 3 criteria
 * The project makes use of references in function declarations: 
   * Game::PlaceItem is called with a reference to variable item in game.cpp. 
-  * Snake::Update and Bomb::Update called with references to objects snake and bomb in threads t1 and t2
+  * Snake::Update, Bomb::Update and Missile::Update called with references to objects snake, bomb, missile 
+in threads t1, t2 and t3.
 * The project uses move semantics to move data instead of copying it, where possible.
   * Missile objects are moved to the MissileQueue via move semantics
 * The project uses smart pointers instead of raw pointers.
   * MissileQueue object is declared as a shared\_ptr.
 
 ### Concurrency - meet at least 2 criteria
-* The project uses multithreading: Snake::Update() and Bomb::Update() run in separate threads that are joined 
-  at the end of Game::Update()
+* The project uses multithreading: Snake::Update(), Bomb::Update(), Missile::Update are  run in separate 
+threads that are joined at the end of Game::Update()
 * A mutex or lock is used in the project: a lock is used to protect the \_missiles private variable in MissileQueue class.
 * A promise and future is used in the project: missile object is pushed to MissileQueue using async returned to a future.
 
