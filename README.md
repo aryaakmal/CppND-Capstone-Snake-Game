@@ -38,10 +38,11 @@ I have liberally used and repurposed elements of the codebase for the course, in
 
 * The project reads data from a file and process the data, or the program writes data to a file:
   Score, length and time elapsed are written to a new file, or appended to an existing file
+  [main.cpp: l.39-46]
 * The project accepts user input and processes the input:
   The name of the player is read in to the console and used as the base for the output file, also player
   name is displayed in the frame of the game. Game reads input from keyboard to pause or restart the game 
-  by toggling the spacebar.
+  by toggling the spacebar.[main.cpp: l.24-30, controller.cpp: l.39-42, renderer.cpp: l.96-98]
 
 ### Object Oriented Programming - meet at least 3 criteria
 * One or more classes are added to the project with appropriate access specifiers for class members:

@@ -123,12 +123,12 @@ void Game::Update() {
  if (poison.x == new_x && poison.y == new_y) {
     score--;
     //auto missile = mqueue->popBack();
-    mqueue->printSize();
+    //mqueue->printSize();
     if(score > 0){
      missile = std::move(mqueue->popBack());
     }
-    mqueue->printSize();
-    missile.printID();
+    //mqueue->printSize();
+    //missile.printID();
     PlaceItem(poison);
     if(score < 0)
     {
