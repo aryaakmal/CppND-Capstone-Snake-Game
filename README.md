@@ -47,10 +47,11 @@ I have liberally used and repurposed elements of the codebase for the course, in
 ### Object Oriented Programming - meet at least 3 criteria
 * One or more classes are added to the project with appropriate access specifiers for class members:
 Bomb, Missile and MissileQueue classes are added to the program
+[snake.h: l.44, l.71, l.93]
 * Class constructors utilize member initialization lists: Bomb and Missile classes are initialized with 
-initialization lists.
+initialization lists.[snake.h: l.48, l.74]
 * Templates generalize functions or classes in the project: Game::PlaceItem is defined using a template, to
-  accept food and poison variables, or Bomb and Missile objects.
+  accept food and poison variables, or Bomb and Missile objects.[game.cpp: l.66-80 ]
 
 ### Memory Management - meet at least 3 criteria
 * The project makes use of references in function declarations: 
