@@ -55,19 +55,23 @@ initialization lists.[snake.h: l.48, l.74]
 
 ### Memory Management - meet at least 3 criteria
 * The project makes use of references in function declarations: 
-  * Game::PlaceItem is called with a reference to variable item in game.cpp. 
+  * Game::PlaceItem is called with a reference to variable item,  MissileQueue::pushBack is called with
+rvalue reference. [game.cpp: l.67, snake.h: l.95] 
   * Snake::Update, Bomb::Update and Missile::Update called with references to objects snake, bomb, missile 
-in threads t1, t2 and t3.
-* The project uses move semantics to move data instead of copying it, where possible.
+in threads t1, t2 and t3. [game.cpp: ll.85, 139, 140]
+* The project uses move semantics to move data instead of copying it, where possible. 
+[snake.cpp: ll.180, 182. game.cpp: ll.115, 128]
   * Missile objects are moved to the MissileQueue via move semantics
-* The project uses smart pointers instead of raw pointers.
+* The project uses smart pointers instead of raw pointers. [game.h: l.28]
   * MissileQueue object is declared as a shared\_ptr.
 
 ### Concurrency - meet at least 2 criteria
 * The project uses multithreading: Snake::Update(), Bomb::Update(), Missile::Update are  run in separate 
-threads that are joined at the end of Game::Update()
+threads that are joined at the end of Game::Update(). [game.cpp: l.85-143]
 * A mutex or lock is used in the project: a lock is used to protect the \_missiles private variable in MissileQueue class.
+[snake.cpp: l.181, l.187, l.193]
 * A promise and future is used in the project: missile object is pushed to MissileQueue using async returned to a future.
+[game.cpp: l.85, l.115, l.138]
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
