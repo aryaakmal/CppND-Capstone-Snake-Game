@@ -14,10 +14,10 @@ I have liberally used and repurposed elements of the codebase for the course, in
 * User enters name at start; Score, Length and Time elapsed are printed to \<name\>.results.txt in local directory.
 * Game can be paused and restarted by toggling the spacebar.
 * Player name displayed in window title.
-* Poison placed on game grid. Lose point if snake passes over it. Game ends when score is negative.
-* Randomly moving bomb object placed on grid.
+* Poison placed on game grid (static, orange cell.). Lose point if snake passes over it. Game ends when score is negative.
+* Randomly moving bomb object (red cell) placed on grid.
   * if head of snake is colocated with bomb, game ends.
-* Missiles 
+* Missile (uniformly moving red cell)
   * a missile is created and pushed onto a queue each time food is ingested. 
   * a missile is popped off the queue and placed on grid each time poison is ingested. 
   * if head of snake is colocated with missile, game ends.
